@@ -42,6 +42,22 @@
 
     <div>
       <center><h1>Open Hours</h1></center>
+      <center>
+        <h2>
+          <span id="open-start-day">Start Day</span>-<span id="open-close-day"
+            >End Day</span
+          >
+        </h2>
+      </center>
+      <center>
+        <h2>
+          <span id="open-start-time">Start Time</span>-<span
+            id="open-close-time"
+            >End Time</span
+          >
+          (<span id="time-zone-span">Time Zone</span>)
+        </h2>
+      </center>
     </div>
 
     <div
@@ -78,17 +94,43 @@
     <p id="timezonep">Time Zone</p>
 
     <script type="text/javascript">
+      const openStartTime = new Date('December 8, 2024 10:00:00')
+        .toLocaleTimeString('en-US', { hour12: true, hour: '2-digit' })
+        .toLowerCase()
+        .replace(' ', '')
+
+      const openCloseTime = new Date('December 12, 2024 20:00:00')
+        .toLocaleTimeString('en-US', { hour12: true, hour: '2-digit' })
+        .toLowerCase()
+        .replace(' ', '')
+        .replace('0', '')
+
+      const openStartDay = new Date('December 8, 2024 10:00:00')
+        .toLocaleTimeString('en-US', { weekday: 'long' })
+        .split(' ')[0]
+
+      const openCloseDay = new Date('December 12, 2024 20:00:00')
+        .toLocaleTimeString('en-US', { weekday: 'long' })
+        .split(' ')[0]
+
       const timezone = Intl.DateTimeFormat()
         .resolvedOptions()
         .timeZone.replace('/', '%2F')
+      console.log(timezone)
       const htmlBigDiv = `<center><iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=${timezone}&showTitle=0&showDate=1&showPrint=0&mode=WEEK&showTabs=0&showCalendars=0&src=cmVubmFAcHJvamVjdGNhcnZlci5jb20&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=bWVtY2NhcnRoZXJAZ21haWwuY29t&src=bW9udGVuZWdybzk1MkBnbWFpbC5jb20&color=%23B39DDB&color=%230B8043&color=%23C0CA33&color=%23D81B60" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe></center>`
       const htmlSmDiv = `<center><iframe src="https://calendar.google.com/calendar/embed?height=800&wkst=1&bgcolor=%23ffffff&ctz=${timezone}&showTitle=0&showDate=1&showPrint=0&mode=WEEK&showTabs=0&showCalendars=0&src=cmVubmFAcHJvamVjdGNhcnZlci5jb20&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=bWVtY2NhcnRoZXJAZ21haWwuY29t&src=bW9udGVuZWdybzk1MkBnbWFpbC5jb20&color=%23B39DDB&color=%230B8043&color=%23C0CA33&color=%23D81B60" style="border:solid 1px #777" width="300" height="800" frameborder="0" scrolling="no"></iframe></center>`
       document.getElementById('calendar-container-big').innerHTML = htmlBigDiv
       document.getElementById('calendar-container-small').innerHTML = htmlSmDiv
-      document.getElementById('timezonep').innerHTML = timezone.replace(
-        '%2F',
-        ' - '
-      )
+      document.getElementById('open-start-time').innerHTML = openStartTime
+      document.getElementById('open-close-time').innerHTML = openCloseTime
+      document.getElementById('open-start-day').innerHTML = openStartDay
+      document.getElementById('open-close-day').innerHTML = openCloseDay
+      document.getElementById('timezonep').innerHTML = timezone
+        .replace('%2F', ' - ')
+        .replace('_', ' ')
+      document.getElementById('time-zone-span').innerHTML = timezone
+        .replace('%2F', ' - ')
+        .replace('_', ' ')
     </script>
   </body>
 </html>

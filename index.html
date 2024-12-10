@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      @media (max-width: 550px) {
+        .big-container {
+          display: none;
+        }
+      }
+      @media (min-width: 550px) {
+        .small-container {
+          display: none;
+        }
+      }
+      /* Responsive iFrame */
+      .responsive-iframe-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        padding-top: 30px;
+        height: 0;
+        overflow: hidden;
+      }
+      .responsive-iframe-container iframe,
+      .vresponsive-iframe-container object,
+      .vresponsive-iframe-container embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .small-container {
+        height: 30vh;
+      }
+    </style>
+
+    <div>
+      <center><h1>Open Hours</h1></center>
+    </div>
+
+    <div
+      class="responsive-iframe-container big-container"
+      id="calendar-container-big"
+    >
+      <center>
+        <iframe
+          src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FChicago&showTitle=0&showDate=1&showPrint=0&mode=WEEK&showTabs=0&showCalendars=0&src=cmVubmFAcHJvamVjdGNhcnZlci5jb20&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=bWVtY2NhcnRoZXJAZ21haWwuY29t&src=bW9udGVuZWdybzk1MkBnbWFpbC5jb20&color=%23B39DDB&color=%230B8043&color=%23C0CA33&color=%23D81B60"
+          style="border: solid 1px #777"
+          width="800"
+          height="600"
+          frameborder="0"
+          scrolling="no"
+        ></iframe>
+      </center>
+    </div>
+
+    <div
+      class="responsive-iframe-container small-container"
+      id="calendar-container-small"
+    >
+      <center>
+        <iframe
+          src="https://calendar.google.com/calendar/embed?height=800&wkst=1&bgcolor=%23ffffff&ctz=America%2FLos_Angeles&showTitle=0&showDate=1&showPrint=0&mode=WEEK&showTabs=0&showCalendars=0&src=cmVubmFAcHJvamVjdGNhcnZlci5jb20&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=bWVtY2NhcnRoZXJAZ21haWwuY29t&src=bW9udGVuZWdybzk1MkBnbWFpbC5jb20&color=%23B39DDB&color=%230B8043&color=%23C0CA33&color=%23D81B60"
+          style="border: solid 1px #777"
+          width="300"
+          height="800"
+          frameborder="0"
+          scrolling="no"
+        ></iframe>
+      </center>
+    </div>
+    <p id="timezonep">Time Zone</p>
+
+    <script type="text/javascript">
+      const timezone = Intl.DateTimeFormat()
+        .resolvedOptions()
+        .timeZone.replace('/', '%2F')
+      const htmlBigDiv = `<center><iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=${timezone}&showTitle=0&showDate=1&showPrint=0&mode=WEEK&showTabs=0&showCalendars=0&src=cmVubmFAcHJvamVjdGNhcnZlci5jb20&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=bWVtY2NhcnRoZXJAZ21haWwuY29t&src=bW9udGVuZWdybzk1MkBnbWFpbC5jb20&color=%23B39DDB&color=%230B8043&color=%23C0CA33&color=%23D81B60" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe></center>`
+      const htmlSmDiv = `<center><iframe src="https://calendar.google.com/calendar/embed?height=800&wkst=1&bgcolor=%23ffffff&ctz=${timezone}&showTitle=0&showDate=1&showPrint=0&mode=WEEK&showTabs=0&showCalendars=0&src=cmVubmFAcHJvamVjdGNhcnZlci5jb20&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=bWVtY2NhcnRoZXJAZ21haWwuY29t&src=bW9udGVuZWdybzk1MkBnbWFpbC5jb20&color=%23B39DDB&color=%230B8043&color=%23C0CA33&color=%23D81B60" style="border:solid 1px #777" width="300" height="800" frameborder="0" scrolling="no"></iframe></center>`
+      document.getElementById('calendar-container-big').innerHTML = htmlBigDiv
+      document.getElementById('calendar-container-small').innerHTML = htmlSmDiv
+      document.getElementById('timezonep').innerHTML = timezone.replace(
+        '%2F',
+        ' - '
+      )
+    </script>
+  </body>
+</html>
